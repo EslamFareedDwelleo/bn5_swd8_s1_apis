@@ -1,6 +1,9 @@
-import 'package:bn5_swd8_s1_apis/features/auth/profile/profile_screen.dart';
+import 'package:bn5_swd8_s1_apis/features/auth/profile/ui/profile_screen.dart';
 import 'package:bn5_swd8_s1_apis/features/posts/main/posts_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../auth/profile/logic/profile_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +16,13 @@ class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
 
   List<Widget> screens = [PostsScreen(), ProfileScreen()];
+
+  @override
+  void initState() {
+    context.read<ProfileCubit>().getProfile();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
