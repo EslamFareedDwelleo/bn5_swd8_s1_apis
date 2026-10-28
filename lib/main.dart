@@ -1,7 +1,6 @@
 import 'package:bn5_swd8_s1_apis/features/auth/profile/logic/profile_cubit.dart';
-import 'package:bn5_swd8_s1_apis/features/forgetPassword/check_box_cubit.dart';
-import 'package:bn5_swd8_s1_apis/features/forgetPassword/counter_cubit.dart';
-import 'package:bn5_swd8_s1_apis/features/forgetPassword/forget_password_screen.dart';
+import 'package:bn5_swd8_s1_apis/features/products/cubits/categoriesCubit/categories_cubit.dart';
+import 'package:bn5_swd8_s1_apis/features/products/cubits/productsCubit/products_cubit.dart';
 import 'package:bn5_swd8_s1_apis/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,22 +23,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfileCubit(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => CounterCubit()),
-            BlocProvider(create: (context) => CheckBoxCubit()),
-          ],
-          child: ForgetPasswordScreen(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => ProductsCubit()),
+          BlocProvider(create: (context) => CategoriesCubit()),
+          BlocProvider(create: (context) => ProfileCubit()),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: SplashScreen(),
         ),
-        // home: BlocProvider(
-        //   create: (context) => CheckBoxCubit(),
-        //   child: BlocProvider(
-        //     create: (context) => CounterCubit(),
-        //     child: ForgetPasswordScreen(),
-        //   ),
-        // ),
       ),
     );
   }

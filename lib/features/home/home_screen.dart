@@ -1,5 +1,6 @@
 import 'package:bn5_swd8_s1_apis/features/auth/profile/ui/profile_screen.dart';
 import 'package:bn5_swd8_s1_apis/features/posts/main/posts_screen.dart';
+import 'package:bn5_swd8_s1_apis/features/products/views/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
 
-  List<Widget> screens = [PostsScreen(), ProfileScreen()];
+  List<Widget> screens = [PostsScreen(), ProductsScreen(), ProfileScreen()];
 
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: index,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.podcasts), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.shop), label: "Products"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
         type: BottomNavigationBarType.fixed,
