@@ -1,4 +1,7 @@
 import 'package:bn5_swd8_s1_apis/features/auth/profile/logic/profile_cubit.dart';
+import 'package:bn5_swd8_s1_apis/features/forgetPassword/check_box_cubit.dart';
+import 'package:bn5_swd8_s1_apis/features/forgetPassword/counter_cubit.dart';
+import 'package:bn5_swd8_s1_apis/features/forgetPassword/forget_password_screen.dart';
 import 'package:bn5_swd8_s1_apis/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +26,20 @@ class MyApp extends StatelessWidget {
       create: (context) => ProfileCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => CounterCubit()),
+            BlocProvider(create: (context) => CheckBoxCubit()),
+          ],
+          child: ForgetPasswordScreen(),
+        ),
+        // home: BlocProvider(
+        //   create: (context) => CheckBoxCubit(),
+        //   child: BlocProvider(
+        //     create: (context) => CounterCubit(),
+        //     child: ForgetPasswordScreen(),
+        //   ),
+        // ),
       ),
     );
   }
