@@ -1,7 +1,11 @@
+import 'package:bn5_swd8_s1_apis/core/components/icon_fav_animation.dart';
+import 'package:bn5_swd8_s1_apis/core/utils/navigation_helper.dart';
 import 'package:bn5_swd8_s1_apis/features/posts/comments/comments_screen.dart';
 import 'package:bn5_swd8_s1_apis/features/posts/createPost/create_post_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
+enum Gender { male, female }
 
 class PostsScreen extends StatefulWidget {
   const PostsScreen({super.key});
@@ -11,6 +15,8 @@ class PostsScreen extends StatefulWidget {
 }
 
 class _PostsScreenState extends State<PostsScreen> {
+  Gender currentUserGender = Gender.female;
+
   @override
   void initState() {
     getPosts();
@@ -52,13 +58,14 @@ class _PostsScreenState extends State<PostsScreen> {
                 return Card(
                   child: ListTile(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              CommentsScreen(id: posts[index]["id"]),
-                        ),
-                      );
+                      context.goTo(CommentsScreen(id: posts[index]["id"]));
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         CommentsScreen(id: posts[index]["id"]),
+                      //   ),
+                      // );
                     },
                     title: Text(posts[index]["title"]),
                     subtitle: Column(
@@ -84,7 +91,7 @@ class _PostsScreenState extends State<PostsScreen> {
                           children: [
                             Column(
                               children: [
-                                Icon(Icons.favorite),
+                                IconFav(),
                                 Text("${posts[index]["reactions"]["likes"]}"),
                               ],
                             ),

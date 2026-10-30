@@ -1,5 +1,6 @@
 import 'package:bn5_swd8_s1_apis/features/products/cubits/categoriesCubit/categories_cubit.dart';
 import 'package:bn5_swd8_s1_apis/features/products/cubits/productsCubit/products_cubit.dart';
+import 'package:bn5_swd8_s1_apis/features/products/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -56,10 +57,23 @@ class ProductsScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Card(
                           child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 40,
-                              backgroundImage: NetworkImage(
-                                products[index].thumbnail,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailsScreen(
+                                    product: products[index],
+                                  ),
+                                ),
+                              );
+                            },
+                            leading: Hero(
+                              tag: products[index].id,
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage: NetworkImage(
+                                  products[index].thumbnail,
+                                ),
                               ),
                             ),
                             title: Text(
